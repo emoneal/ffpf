@@ -53,13 +53,38 @@ export default function PartyProvider(props) {
         .catch(err => console.log(err.response.data.errMsg))
     }
 
+    function editParty(updates, partyId) {
+        partyAxios.put(`/api/parties/${partyId}`, updates)
+            .then(res => {
+                let editedParties = parties.map(party => party._id !== partyId ? party : res.data)
+                setUserState(prevState => ({
+                    ...prevState,
+                    parties: [editedParties]
+                }))
+            })
+    }
+
+    function deleteParty(partyId) {
+        partyAxios.delete(`/api/parties/${partyId}`, partyId)
+            .then(res => {
+                let filteredParties = parties.filter(party => party._id !== partyId)
+                console.log(filteredParties)
+                setUserState(prevState => ({
+                    ...prevState,
+                    parties: filteredParties
+                }))
+            })
+    }
+
     return (
         <PartyContext.Provider
             value={{
                 ...userState,
                 addParty,
                 getUserParties,
-                getAllParties
+                getAllParties,
+                editParty,
+                deleteParty
             }}>
             
             { props.children }

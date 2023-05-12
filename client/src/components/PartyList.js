@@ -7,7 +7,7 @@ import { UserContext } from '../context/UserProvider.js'
 
 export default function PartyList(props) {
     const { parties } = useContext(UserContext)
-    const { deleteParty } = props
+    const { deleteParty, editParty } = props
 
     return (
         <div className="party-list">
@@ -18,6 +18,7 @@ export default function PartyList(props) {
             {...partyItem} 
             key={partyItem._id} 
             deleteParty={deleteParty}
+            editParty={editParty}
             />)}
         </div>
     )

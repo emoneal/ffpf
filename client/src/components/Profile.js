@@ -19,6 +19,7 @@ export default function Profile() {
         addParty,
         parties,
         getAllParties,
+        editParty,
         deleteParty
 
         
@@ -45,7 +46,7 @@ export default function Profile() {
                     <Accordion.Item eventKey="1">
                         <Accordion.Header>Edit Profile</Accordion.Header>
                         <Accordion.Body>
-                            blert
+                            Coming soon...
                         </Accordion.Body>
                     </Accordion.Item>
                 </Accordion>
@@ -56,6 +57,7 @@ export default function Profile() {
                         <Accordion.Body>
                             <PartyList 
                             parties={parties} 
+                            editParty={editParty}
                             deleteParty={deleteParty}
                             />
                         </Accordion.Body>

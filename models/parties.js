@@ -25,4 +25,6 @@ const partySchema = new Schema({
     }
 })
 
+
+
 module.exports = mongoose.model("Party", partySchema)

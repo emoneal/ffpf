@@ -5,20 +5,22 @@ import Button from 'react-bootstrap/Button'
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 
-const initInputs = {
-    title: "",
-    description: "",
-    eventStartTime: "",
-    rolesNeeded: []
-
-}
 
 const jobs = ['PLD', 'WAR', 'DRK', 'GNB', 'WHM', 'SCH', 'AST', 'SGE', 'MNK', 'DRG', 'NIN', 'SAM', 'RPR', 'BRD', 'MCH', 'DNC', 'BLM', 'SMN', 'RDM', 'BLU']
 
-export default function PartyForm(props) {
+export default function EditForm(props) {
+
+
+    const initInputs = {
+        title: "" || props.title,
+        description: "" || props.description,
+        eventStartTime: "" || props.eventStartTime,
+        rolesNeeded: [] || props.rolesNeeded
+    
+    }
 
     const [inputs, setInputs] = useState(initInputs)
-    const { addParty } = props
+    const { editParty } = props
 
     
     function handleCheckbox(e){
@@ -40,7 +42,7 @@ export default function PartyForm(props) {
     console.log(inputs)
     function handleSubmit(e) {
         e.preventDefault()
-        addParty(inputs)
+        editParty(inputs)
         setInputs(initInputs)
     }
 
@@ -52,7 +54,7 @@ export default function PartyForm(props) {
             <Form.Group as={Row} className="mb-3">
                 <Form.Control 
                     type="text"
-                    value={title}
+                    value={inputs.title}
                     name="title"
                     onChange={handleChange}
                     placeholder="Title" 
@@ -64,7 +66,7 @@ export default function PartyForm(props) {
             <Form.Group as={Row} className="mb-3">
                 <Form.Control 
                     type="text"
-                    value={description}
+                    value={inputs.description}
                     name="description"
                     placeholder="Description"
                     onChange={handleChange}
@@ -75,22 +77,21 @@ export default function PartyForm(props) {
             <Form.Group as={Row} className="mb-3">
                 <Form.Control 
                     type="date"
-                    value={eventStartTime}
+                    value={inputs.eventStartTime}
                     name="eventStartTime"
                     placeholder="Event Start Time..."
                     onChange={handleChange}
                     
                 />
             </Form.Group>
-            <Form.Label>Roles Needed:</Form.Label>
-            <br />
+
             <ToggleButtonGroup value={rolesNeeded} type="checkbox" className="mb-2">
                 {jobs.map((job, idx) => (
                 <ToggleButton 
                     key={idx}
                     id={idx} 
                     value={job}
-                    name={rolesNeeded}
+                    name={inputs.rolesNeeded}
                     onChange={handleCheckbox}
                 >
                 {job}
@@ -101,7 +102,7 @@ export default function PartyForm(props) {
 
             <br />
             <br />
-            <Button className="btn btn-primary btn-small centerButton" variant="primary" type="submit">Add Party</Button>
+            <Button className="btn btn-primary btn-small centerButton" variant="primary" type="submit">Edit Party</Button>
         </Form>
     )
 

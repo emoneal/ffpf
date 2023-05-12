@@ -9,13 +9,17 @@
 }
 
 
-.profile {
-    border: 1px solid black;
-    border-radius: 1%;
-
+.party-container {
+    margin: 50px 300px;
 }
 
-.party--single {
+.party {
     border: 1px solid black;
     border-radius: 1%;
+    margin: 0px 50px 0px 0px;
+}
+
+.roles-needed {
+    padding: 20px 5px 0px 0px;
+    margin: 0
 }

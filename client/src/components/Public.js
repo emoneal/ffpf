@@ -28,7 +28,7 @@ export default function Public() {
     },[])
 
     return (
-        <div className="profile">
+        <div className="profile-container">
             <PublicPartyList parties={parties} />
         </div>
     )

@@ -12,7 +12,7 @@ partyRouter.get("/", (req, res, next) => {
       return next(err)
     }
     return res.status(200).send(parties)
-  })
+  }).populate("user", "-password")
 })
 
 // Get party by id
@@ -26,7 +26,7 @@ partyRouter.get("/:partyId", (req, res, next) => {
       }
       return res.status(200).send(foundParty)
     }
-  )
+  ).populate("user", "-password")
 
   }
 )
@@ -41,7 +41,7 @@ partyRouter.get("/find/user", (req, res, next) => {
     }
     console.log(parties, "parties")
     return res.status(200).send(parties)
-  })
+  }).populate("user", "-password")
 })
 // partyRouter.get("/:userId", (req, res, next) => {
 //   console.log(req.auth._id, "id")

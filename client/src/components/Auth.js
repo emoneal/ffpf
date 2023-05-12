@@ -34,6 +34,7 @@ export default function Auth() {
 
     return (
         <div className="auth-container">
+            <h2>Welcome to FFPF!</h2>
             { !toggle ? 
                 <>
                     <h1>Login</h1>
