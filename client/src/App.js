@@ -3,7 +3,7 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar.js'
 import Auth from './components/Auth.js'
 import Profile from './components/Profile.js'
-// import Public from './components/Public.js'
+import Public from './components/Public.js'
 import { UserContext } from './context/UserProvider.js'
 import { PartyContext } from './context/PartyProvider.js'
 import './App.scss'
@@ -25,10 +25,10 @@ export default function App() {
         path="/profile"
         element={<Profile />}
       />
-      {/* <Route 
+      <Route 
         path="/public"
         element={<Public />}
-      /> */}
+      />
       </Routes>
     </div>
   )

@@ -19,18 +19,25 @@ export default function PartyForm(props) {
 
     const [inputs, setInputs] = useState(initInputs)
     const { addParty } = props
-    const [roles, setRoles] = useState([]);
 
+    
+    function handleCheckbox(e){
+        const {name, value} = e.target
+        setInputs(prev => ({
+            ...prev,
+            rolesNeeded: [...prev.rolesNeeded, value]
+        }))
+    }
 
     function handleChange(e) {
-        const {name, value} = e.target
+        const {name, value, type, checked} = e.target
         setInputs(prevInputs => ({
             ...prevInputs,
             [name]: value
         }))
-        console.log(inputs)
+        
     }
-
+    console.log(inputs)
     function handleSubmit(e) {
         e.preventDefault()
         addParty(inputs)
@@ -76,13 +83,14 @@ export default function PartyForm(props) {
                 />
             </Form.Group>
 
-            <ToggleButtonGroup type="checkbox" defaultValue={[1, 3]} className="mb-2">
+            <ToggleButtonGroup value={rolesNeeded} type="checkbox" className="mb-2">
                 {jobs.map((job, idx) => (
                 <ToggleButton 
                     key={idx}
                     id={idx} 
                     value={job}
-                    onChange={handleChange}
+                    name={rolesNeeded}
+                    onChange={handleCheckbox}
                 >
                 {job}
                 </ToggleButton>

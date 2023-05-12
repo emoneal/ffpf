@@ -1,6 +1,8 @@
 const express = require("express")
 const partyRouter = express.Router()
 const Party = require('../models/parties.js')
+const mongoose = require('mongoose')
+const ObjectId = mongoose.Types.ObjectId;
 
 // Get All parties
 partyRouter.get("/", (req, res, next) => {
@@ -16,8 +18,7 @@ partyRouter.get("/", (req, res, next) => {
 // Get party by id
 
 partyRouter.get("/:partyId", (req, res, next) => {
-  Party.findOne(
-    { _id: req.params.partyId },
+  Party.findOne({ _id: req.params.partyId },
     (err, foundParty) => {
       if (err) {
         res.status(500)
@@ -31,15 +32,29 @@ partyRouter.get("/:partyId", (req, res, next) => {
 )
 
 // Get parties by user id
-partyRouter.get("/user", (req, res, next) => {
+partyRouter.get("/find/user", (req, res, next) => {
+  console.log(req.auth._id, "id")
   Party.find({ user: req.auth._id }, (err, parties) => {
     if(err){
       res.status(500)
       return next(err)
     }
+    console.log(parties, "parties")
     return res.status(200).send(parties)
   })
 })
+// partyRouter.get("/:userId", (req, res, next) => {
+//   console.log(req.auth._id, "id")
+//   Party.find({ user: req.params.userId }, (err, parties) => {
+//     if(err){
+//       res.status(500)
+//       return next(err)
+//     }
+//     console.log(parties, "parties")
+//     return res.status(200).send(parties)
+//   })
+// })
+
 
 // Add new party
 partyRouter.post("/", (req, res, next) => {
@@ -56,6 +71,8 @@ partyRouter.post("/", (req, res, next) => {
 
 // Delete party
 partyRouter.delete("/:partyId", (req, res, next) => {
+  console.log(req.auth._id)
+  console.log(req.params.partyId)
   Party.findOneAndDelete(
     { _id: req.params.partyId, user: req.auth._id },
     (err, deletedparty) => {

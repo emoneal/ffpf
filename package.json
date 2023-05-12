@@ -9,5 +9,24 @@
     "mongoose": "^6.10.3",
     "morgan": "^1.10.0",
     "react-bootstrap": "^2.7.4"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "ffpf",
+  "description": "This is a personal project aimed to add more convenience for users that wish to do content cross-server.",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emoneal/ffpf.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emoneal/ffpf/issues"
+  },
+  "homepage": "https://github.com/emoneal/ffpf#readme"
 }

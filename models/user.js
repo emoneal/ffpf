@@ -18,13 +18,7 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    lodestone: {
-        type: Array,
-        required: true
-    },
-    joinedParties: {
-        type: Schema.Types.ObjectId,
-    },
+    
     isAdmin: {
         type: Boolean,
         default: false

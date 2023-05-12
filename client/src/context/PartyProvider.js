@@ -15,11 +15,12 @@ partyAxios.interceptors.request.use(config => {
 
 export default function PartyProvider(props) {
   
-    const { user, userState, setUserState } = useContext(UserContext)
+    const { user, userState, setUserState, errMsg } = useContext(UserContext)
+    const parties = []
 
     
     function getUserParties(){
-        partyAxios.get("/api/todo/user")
+        partyAxios.get("/api/parties/find/user")
           .then(res => {
             setUserState(prevState => ({
               ...prevState,
@@ -29,14 +30,24 @@ export default function PartyProvider(props) {
           .catch(err => console.log(err.response.data.errMsg))
       }
 
+    function getAllParties() {
+        partyAxios.get("/api/parties")
+            .then(res => {
+                setUserState(prevState => ({
+                    ...prevState,
+                    parties: res.data
+                }))
+            })
+            .catch(err => console.log(err.response.data.errMsg))
+    }
 
     function addParty(newParty) {
-        partyAxios.post("/", newParty)
+        partyAxios.post("/api/parties", newParty)
         .then(res => {
+            console.log(res.data)
             setUserState(prevState => ({
                 ...prevState,
-                
-                parties: [...prevState.parties, user, res.data]
+                parties: [...prevState.parties, res.data]
             }))
         })
         .catch(err => console.log(err.response.data.errMsg))
@@ -47,7 +58,8 @@ export default function PartyProvider(props) {
             value={{
                 ...userState,
                 addParty,
-                getUserParties
+                getUserParties,
+                getAllParties
             }}>
             
             { props.children }

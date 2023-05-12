@@ -79,7 +79,7 @@ export default function UserProvider(props){
   }
 
   function getUserParties(){
-    userAxios.get("/api/todo/user")
+    userAxios.get("/api/parties/find/user")
       .then(res => {
         setUserState(prevState => ({
           ...prevState,
@@ -89,15 +89,18 @@ export default function UserProvider(props){
       .catch(err => console.log(err.response.data.errMsg))
   }
 
+  console.log(userState, "testing userState")
 
   return (
     <UserContext.Provider
       value={{
         ...userState,
+        setUserState,
         signup,
         login,
         logout,
-        resetAuthErr
+        resetAuthErr,
+        getUserParties
       }}>
       { props.children }
     </UserContext.Provider>

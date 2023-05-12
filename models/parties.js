@@ -14,26 +14,10 @@ const partySchema = new Schema({
         type: Date,
         required: true
     },
-    players: {
-        type: Array,
-        
-            name: {
-                type: String,
-                default: Schema.Types.ObjectId,
-                required: true
-            },
-            job: {
-                type: String,
-                
-            },
-            lodestone: {
-                type: String,
-            }
-        },
-    rolesNeeded: {
-        type: Array,
-        default: "any"
-    },
+    rolesNeeded: [{ 
+        type: String,
+        required: true
+    }],
     user: {
         type: Schema.Types.ObjectId,
         ref: "User",
